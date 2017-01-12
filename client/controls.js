@@ -123,7 +123,7 @@ function init(){
 	
          blockKey = false;
 
-       /* switch(event.keyCode){
+        switch(event.keyCode){
         case 38://haut
             stop('haut');
             break;
@@ -153,7 +153,7 @@ function init(){
         case 34://page bas
             stop('teteBas');
             break;
-        }*/
+        }
      });
 }
 
