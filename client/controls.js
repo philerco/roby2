@@ -4,6 +4,30 @@ var waiting = false;
 var speed = 255;
 var blockKey = false;
 
+function test(){
+    
+    console.log("test");
+    
+    $.ajax
+      ({ 
+	  url: '../serveur/get_value.php',
+	  data: {"motor": "motorD"},
+	  type: 'post',
+	  dataType: 'json',
+	  success: function(data)
+	  {        
+		  console.log("data recieved");
+		  console.log(data);
+		  
+	  },
+	  error:function(){
+		console.log("no data");
+		
+	      }
+      });
+    
+}
+
 function move(direction){
  
   console.log(direction);

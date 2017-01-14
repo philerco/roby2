@@ -55,14 +55,14 @@ function get_all($db, $robyname){
     try
     {
             $stmt = $db->prepare("SELECT * FROM RobyControls WHERE _idRobyName=$robyname");
-            $restultat = $stmt->execute();
+            $stmt->execute();
     }
     catch (PDOException  $e)
     {
                     die('Erreur : ' . $e->getMessage());
     }
     
-    return $resutlat->fetch_all();
+    return $stmt->fetchAll();
 }
 
 function create_command($db, $robyname, $action, $value){
@@ -83,12 +83,31 @@ function set_value($db, $robyname, $action, $value){
     try
     {
             $stmt = $db->prepare("UPDATE RobyControls SET `controll`=?, `value`=? WHERE _idRobyName=? AND controll=?");
-            $restultat = $stmt->execute(array($action, $value, $robyname, $action));
+            $resultat = $stmt->execute(array($action, $value, $robyname, $action));
     }
     catch (PDOException  $e)
     {
                     die('Erreur : ' . $e->getMessage());
     }
+}
+
+function get_value($db, $robyname, $action){
+    try
+    {
+            //echo "SELECT value FROM RobyControls WHERE _idRobyName=$robyname AND controll='$action'---";
+            $stmt = $db->prepare("SELECT value FROM RobyControls WHERE _idRobyName=? AND controll=?");
+            $stmt->execute(array($robyname, $action));
+            
+            $resultat = $stmt->fetch();
+            
+    }
+    catch (PDOException  $e)
+    {
+                    die('Erreur : ' . $e->getMessage());
+    }
+    
+    return $resultat[0];
+    
 }
 
 function reset_all($db, $robyname, $tabActions){
